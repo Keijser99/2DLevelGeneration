@@ -6,16 +6,16 @@ using Cinemachine;
 public class LevelGenerator : MonoBehaviour
 {
     enum LevelTile {empty, floor, wall, bottomWall};
-    LevelTile[,] grid;
+    LevelTile[,] grid; //Comma means it is a two dimensional array, so the variable 'grid' has two variables stored in the array
     struct RandomWalker {
 		public Vector2 dir;
 		public Vector2 pos;
 	}
-    List<RandomWalker> walkers; 
+    List<RandomWalker> walkers;
 
-    public GameObject[] floorTiles;
-    public GameObject[] wallTiles;
-    public GameObject[] bottomWallTiles;
+    public GameObject[] floorTiles; //Is generated first
+    public GameObject[] wallTiles; //Generates around placed floor tiles
+    public GameObject[] bottomWallTiles; //Overwrites generated wall tiles that have a floor tile under them
     public GameObject exit;
     public GameObject player;
 
@@ -27,7 +27,7 @@ public class LevelGenerator : MonoBehaviour
 	public float chanceWalkerChangeDir = 0.5f;
     public float chanceWalkerSpawn = 0.05f;
     public float chanceWalkerDestoy = 0.05f;
-    public int maxWalkers = 10;
+    public int maxWalkers = 1;
     public int iterationSteps = 100000;
 
     void Awake() {
@@ -185,7 +185,7 @@ public class LevelGenerator : MonoBehaviour
 		}
 	}    
 
-	Vector2 RandomDirection(){
+	Vector2 RandomDirection(){	//Chooses a random direction (north, east
 		int choice = Mathf.FloorToInt(Random.value * 3.99f);
 		switch (choice){
 			case 0:
