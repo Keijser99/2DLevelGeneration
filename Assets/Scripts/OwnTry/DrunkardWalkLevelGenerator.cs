@@ -13,7 +13,7 @@ public class DrunkardWalkLevelGenerator : MonoBehaviour
 	}
     List<RandomWalker> walkers;
 
-    public GameObject[] floorTiles; //Is generated first
+    public GameObject[] floorTiles; //Floors are generated first by the Drunkards Walk Algorithm
     public GameObject[] wallTiles; //Generates around placed floor tiles
     public GameObject[] bottomWallTiles; //Overwrites generated wall tiles that have a floor tile under them
     public GameObject exit;
@@ -53,7 +53,7 @@ public class DrunkardWalkLevelGenerator : MonoBehaviour
 		walkers = new List<RandomWalker>();
 		RandomWalker walker = new RandomWalker();
 		walker.dir = RandomDirection();
-		Vector2 pos = new Vector2(Mathf.RoundToInt(levelWidth/ 2.0f), Mathf.RoundToInt(levelHeight/ 2.0f));
+		Vector2 pos = new Vector2(Mathf.RoundToInt(levelWidth/ 2.0f), Mathf.RoundToInt(levelHeight/ 2.0f)); //Walker starts in the middle of the grid
 		walker.pos = pos;
 		walkers.Add(walker);
     }
@@ -61,7 +61,7 @@ public class DrunkardWalkLevelGenerator : MonoBehaviour
 	void CreateFloors() {
 		int iterations = 0;
 		do{
-			//create floor at position of every Walker
+			//assign floor enum member at position of every Walker
 			foreach (RandomWalker walker in walkers){
 				grid[(int)walker.pos.x,(int)walker.pos.y] = LevelTile.floor;
 			}
