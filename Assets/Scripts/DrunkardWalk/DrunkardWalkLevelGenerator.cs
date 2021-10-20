@@ -19,8 +19,6 @@ public class DrunkardWalkLevelGenerator : MonoBehaviour
     public GameObject exit;
     public GameObject player;
 
-    //public GameObject virtualCamera;
-
     public int levelWidth;
     public int levelHeight;
 	public float percentToFill = 0.2f; 
@@ -213,8 +211,6 @@ public class DrunkardWalkLevelGenerator : MonoBehaviour
 		Vector3 pos = new Vector3(Mathf.RoundToInt(levelWidth / 2.0f),
 										Mathf.RoundToInt(levelHeight / 2.0f), 0);
 		GameObject playerObj = Instantiate(player, pos, Quaternion.identity) as GameObject;
-        //CinemachineVirtualCamera vCam = virtualCamera.GetComponent<CinemachineVirtualCamera>();
-        //vCam.m_Follow = playerObj.transform;
     }
 
     public void SpawnExit() {

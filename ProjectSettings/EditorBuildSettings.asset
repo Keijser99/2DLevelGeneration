@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/LevelGeneration.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
+    path: Assets/Scenes/DrunkardWalkLevelGeneration.unity
+    guid: dd809d466f33097478d71f704a8fc0e9
+  - enabled: 1
+    path: Assets/Scenes/HuntAndKillLevelGeneration.unity
+    guid: e16aa9d3602b1e04f8cab14bca5423ac
   m_configObjects: {}

@@ -151,7 +151,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &455162467
 GameObject:
@@ -169,7 +169,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &455162468
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -182,9 +182,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b57e8b2694463c4409a3de1d2cffb63c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  switchAlgorithmState: 1
-  drunkardWalk: {fileID: 893709029}
-  otherAlgorithm: {fileID: 851406050}
 --- !u!4 &455162469
 Transform:
   m_ObjectHideFlags: 0
@@ -199,36 +196,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &851406050
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 851406051}
-  m_Layer: 0
-  m_Name: OtherLevelGenerator
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &851406051
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 851406050}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.094338, y: 15.889885, z: -288.20328}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &893709029
 GameObject:
   m_ObjectHideFlags: 0
@@ -240,7 +207,7 @@ GameObject:
   - component: {fileID: 893709031}
   - component: {fileID: 893709030}
   m_Layer: 0
-  m_Name: DrunkardWalkLevelGenerator
+  m_Name: HuntAndKillLevelGenerator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -255,7 +222,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 893709029}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c19832bca2c0deb42b2f12ca6faa2898, type: 3}
+  m_Script: {fileID: 11500000, guid: 6dbfc8ed9b131124086d7c27484105c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   floorTiles:
@@ -437,6 +404,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2789434460995683662, guid: d59c4639acc50034a92b9ac5e9f4749d,
+        type: 3}
+      propertyPath: m_CullTransparentMesh
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2789434460995683663, guid: d59c4639acc50034a92b9ac5e9f4749d,
+        type: 3}
+      propertyPath: m_text
+      value: PRESS 'R' TO RELOAD THE SCENE
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d59c4639acc50034a92b9ac5e9f4749d, type: 3}
