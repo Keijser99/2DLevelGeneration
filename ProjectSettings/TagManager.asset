@@ -50,7 +50,7 @@ TagManager:
   - name: Walls
     uniqueID: 873517597
     locked: 0
-  - name: Exit
+  - name: Doorway
     uniqueID: 2793386439
     locked: 0
   - name: Player

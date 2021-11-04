@@ -151,9 +151,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &455162467
+--- !u!1 &923862940
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -161,68 +161,25 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 455162469}
-  - component: {fileID: 455162468}
+  - component: {fileID: 923862942}
+  - component: {fileID: 923862941}
   m_Layer: 0
-  m_Name: NewSceneReloader
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!114 &455162468
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 455162467}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b57e8b2694463c4409a3de1d2cffb63c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &455162469
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 455162467}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11.016795, y: 4.240477, z: -268.2748}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &893709029
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 893709031}
-  - component: {fileID: 893709030}
-  m_Layer: 0
-  m_Name: HuntAndKillLevelGenerator
+  m_Name: RebuildedHuntAndKillLevelGenerator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &893709030
+--- !u!114 &923862941
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 893709029}
+  m_GameObject: {fileID: 923862940}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6dbfc8ed9b131124086d7c27484105c3, type: 3}
+  m_Script: {fileID: 11500000, guid: 3f450454bee170d418fe86b53775c57b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   floorTiles:
@@ -233,30 +190,28 @@ MonoBehaviour:
   - {fileID: 7146631793776986109, guid: 129ceac3d23ae4d84bdec83c3d00a797, type: 3}
   bottomWallTiles:
   - {fileID: 3253358812288048509, guid: c9896181e03ce9d459f8d19f1d8d6a14, type: 3}
-  - {fileID: 6258182413637628832, guid: bf6febbc0b3d5d946acec4f15767fdf5, type: 3}
+  - {fileID: 3253358812288048509, guid: 896e982aff933aa4baeaf198770c3f1f, type: 3}
   exit: {fileID: 3974025287381290336, guid: ed9156316bfb49c4bbc630ccaaaff9c7, type: 3}
   player: {fileID: 662959747117437559, guid: 75588177aa24da4409c46f5a5294da0b, type: 3}
+  start: {fileID: 2928700710886831936, guid: 9bb9b785dafd91d42a74cb0449f25d32, type: 3}
   levelWidth: 30
   levelHeight: 30
-  percentToFill: 0.2
-  chanceWalkerChangeDir: 0.5
-  chanceWalkerSpawn: 0.05
-  chanceWalkerDestoy: 0.05
-  maxWalkers: 1
-  iterationSteps: 100000
---- !u!4 &893709031
+  percentToFill: 0.8
+  iterationSteps: 200000
+  canDebug: 0
+--- !u!4 &923862942
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 893709029}
+  m_GameObject: {fileID: 923862940}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 11.016795, y: 4.240477, z: -268.2748}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &981729331
 GameObject:
@@ -286,7 +241,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2059006155
 PrefabInstance:
@@ -413,7 +368,7 @@ PrefabInstance:
     - target: {fileID: 2789434460995683663, guid: d59c4639acc50034a92b9ac5e9f4749d,
         type: 3}
       propertyPath: m_text
-      value: PRESS 'R' TO RELOAD THE SCENE
+      value: PRESS 'R' TO SWAP ALGORITHMS
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d59c4639acc50034a92b9ac5e9f4749d, type: 3}

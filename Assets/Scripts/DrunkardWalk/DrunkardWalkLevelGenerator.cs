@@ -5,7 +5,7 @@ using Cinemachine;
 
 public class DrunkardWalkLevelGenerator : MonoBehaviour
 {
-    enum LevelTile {empty, floor, wall, bottomWall};
+    enum LevelTile {empty, floor, wall, bottomWall, start};
     LevelTile[,] grid; //Comma means it is a two dimensional array, so the variable 'grid' has two variables stored in the array
     struct RandomWalker {
 		public Vector2 dir;
@@ -18,22 +18,30 @@ public class DrunkardWalkLevelGenerator : MonoBehaviour
     public GameObject[] bottomWallTiles; //Overwrites generated wall tiles that have a floor tile under them
     public GameObject exit;
     public GameObject player;
+	public GameObject start;
 
-    public int levelWidth;
-    public int levelHeight;
+	[SerializeField]
+	[Range(1, 50)]
+	private int levelWidth;
+
+	[SerializeField]
+	[Range(1, 50)]
+	private int levelHeight;
+
 	public float percentToFill = 0.2f; 
 	public float chanceWalkerChangeDir = 0.5f;
-    public float chanceWalkerSpawn = 0.05f;
-    public float chanceWalkerDestoy = 0.05f;
     public int maxWalkers = 1;
     public int iterationSteps = 100000;
 
-    void Awake() {
+	private Vector2 playerSpawnpoint;
+
+	void Awake() {
         Setup();
         CreateFloors();    
         CreateWalls();
         CreateBottomWalls();
         SpawnLevel();
+		SpawnStartTile();
         SpawnPlayer();
         SpawnExit();
     }
@@ -41,6 +49,8 @@ public class DrunkardWalkLevelGenerator : MonoBehaviour
     void Setup() {
         // prepare grid
 		grid = new LevelTile[levelWidth, levelHeight];
+
+		//fill 'grid' with empty Level tiles
 		for (int x = 0; x < levelWidth - 1; x++){
 			for (int y = 0; y < levelHeight - 1; y++){ 
 				grid[x, y] = LevelTile.empty;
@@ -51,10 +61,15 @@ public class DrunkardWalkLevelGenerator : MonoBehaviour
 		walkers = new List<RandomWalker>();
 		RandomWalker walker = new RandomWalker();
 		walker.dir = RandomDirection();
+
 		Vector2 pos = new Vector2(Mathf.RoundToInt(levelWidth/ 2.0f), Mathf.RoundToInt(levelHeight/ 2.0f)); //Walker starts in the middle of the grid
-		walker.pos = pos;
+		playerSpawnpoint = pos;
+		walker.pos = pos;		
+
+		grid[(int)pos.x, (int)pos.y] = LevelTile.start;
+
 		walkers.Add(walker);
-    }
+	}
 
 	void CreateFloors() {
 		int iterations = 0;
@@ -64,32 +79,12 @@ public class DrunkardWalkLevelGenerator : MonoBehaviour
 				grid[(int)walker.pos.x,(int)walker.pos.y] = LevelTile.floor;
 			}
 
-			//chance: destroy Walker
-			int numberChecks = walkers.Count;
-			for (int i = 0; i < numberChecks; i++) {
-				if (Random.value < chanceWalkerDestoy && walkers.Count > 1){
-					walkers.RemoveAt(i);
-					break;
-				}
-			}
-
 			//chance: Walker pick new direction
 			for (int i = 0; i < walkers.Count; i++) {
 				if (Random.value < chanceWalkerChangeDir){
 					RandomWalker thisWalker = walkers[i];
 					thisWalker.dir = RandomDirection();
 					walkers[i] = thisWalker;
-				}
-			}
-
-			//chance: spawn new Walker
-			numberChecks = walkers.Count;
-			for (int i = 0; i < numberChecks; i++){
-				if (Random.value < chanceWalkerSpawn && walkers.Count < maxWalkers) {
-					RandomWalker walker = new RandomWalker();
-					walker.dir = RandomDirection();
-					walker.pos = walkers[i].pos;
-					walkers.Add(walker);
 				}
 			}
 
@@ -163,14 +158,22 @@ public class DrunkardWalkLevelGenerator : MonoBehaviour
 		}
 	}
 
-	void SpawnLevel(){
-		for (int x = 0; x < levelWidth; x++) {
-			for (int y = 0; y < levelHeight; y++) {
-				switch(grid[x, y]) {
+	void SpawnLevel()
+	{
+		for (int x = 0; x < levelWidth; x++)
+		{
+			for (int y = 0; y < levelHeight; y++)
+			{
+				//spawn the correct sprites for the tiles from the respective list
+				switch (grid[x, y])
+				{
 					case LevelTile.empty:
 						break;
 					case LevelTile.floor:
 						Spawn(x, y, floorTiles[Random.Range(0, floorTiles.Length)]);
+						break;
+					case LevelTile.start:
+						Spawn(x, y, start);
 						break;
 					case LevelTile.wall:
 						Spawn(x, y, wallTiles[Random.Range(0, wallTiles.Length)]);
@@ -181,11 +184,13 @@ public class DrunkardWalkLevelGenerator : MonoBehaviour
 				}
 			}
 		}
-	}    
+	}
 
-	Vector2 RandomDirection(){	//Chooses a random direction (north, east
+	Vector2 RandomDirection()
+	{   //Chooses a random direction (north, east, south, west)
 		int choice = Mathf.FloorToInt(Random.value * 3.99f);
-		switch (choice){
+		switch (choice)
+		{
 			case 0:
 				return Vector2.down;
 			case 1:
@@ -207,16 +212,20 @@ public class DrunkardWalkLevelGenerator : MonoBehaviour
 		return count;
 	}
 
-    void SpawnPlayer() {
-		Vector3 pos = new Vector3(Mathf.RoundToInt(levelWidth / 2.0f),
-										Mathf.RoundToInt(levelHeight / 2.0f), 0);
-		GameObject playerObj = Instantiate(player, pos, Quaternion.identity) as GameObject;
+	void SpawnStartTile()
+	{
+		Vector2 startTile = playerSpawnpoint;
+		Spawn(startTile.x, startTile.y, start);
+	}
+
+	void SpawnPlayer() {
+		Vector3 playerPos = new Vector3(Mathf.RoundToInt(levelWidth / 2.0f), Mathf.RoundToInt(levelHeight / 2.0f), 0);
+		GameObject playerObj = Instantiate(player, playerPos, Quaternion.identity) as GameObject;
     }
 
     public void SpawnExit() {
 
-        Vector2 playerPos = new Vector2(Mathf.RoundToInt(levelWidth/ 2.0f),
-                                Mathf.RoundToInt(levelHeight/ 2.0f));
+        Vector2 playerPos = new Vector2(Mathf.RoundToInt(levelWidth/ 2.0f), Mathf.RoundToInt(levelHeight/ 2.0f));
         Vector2 exitPos = playerPos;
         float exitDistance = 0f;
 
@@ -238,5 +247,11 @@ public class DrunkardWalkLevelGenerator : MonoBehaviour
 
 	void Spawn(float x, float y, GameObject toSpawn) {
 		Instantiate(toSpawn, new Vector3(x, y, 0), Quaternion.identity);
+	}
+
+	private void OnDrawGizmos()
+	{
+		Gizmos.color = Color.green;
+		Gizmos.DrawSphere(playerSpawnpoint, .5f);
 	}
 }
