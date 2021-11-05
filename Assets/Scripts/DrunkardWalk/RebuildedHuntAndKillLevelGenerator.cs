@@ -296,13 +296,14 @@ public class RebuildedHuntAndKillLevelGenerator : MonoBehaviour
 
 	Vector2 HuntForNewPosition()
     {
-		Vector2 newPos;
-		if(canDebug) Debug.Log($"Hunting for new position");
+		Vector2 newPos = new Vector2(0,0);
+		
 
 		for (int x = 0; x < levelWidth - 1; x++)
 		{
 			for (int y = 0; y < levelHeight - 1; y++)
 			{
+				if (canDebug) Debug.Log($"Checking position: {x}, {y}");
 				if (grid[x, y] == LevelTile.empty)
 				{
 					newPos = new Vector2(x, y);
@@ -311,7 +312,8 @@ public class RebuildedHuntAndKillLevelGenerator : MonoBehaviour
 				}
 			}
 		}
-		return Vector2.zero;
+		if (canDebug) Debug.Log($"newPos outside for-loop: {newPos}");
+		return newPos;
 	}
 
 	Vector2 RandomDirection()
@@ -379,6 +381,13 @@ public class RebuildedHuntAndKillLevelGenerator : MonoBehaviour
 
 	void Spawn(float x, float y, GameObject toSpawn) {
 		Instantiate(toSpawn, new Vector3(x, y, 0), Quaternion.identity);
+	}
+
+	public void MiningWalls(Vector2 minedWallpos)
+    {
+		grid[(int)minedWallpos.x, (int)minedWallpos.y] = LevelTile.floor;
+		Spawn(minedWallpos.x, minedWallpos.y, floorTiles[Random.Range(0, floorTiles.Length)]);
+		CreateWalls();
 	}
 
 	private void OnDrawGizmos()

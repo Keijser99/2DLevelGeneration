@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 662959747117437556}
   - component: {fileID: 662959747117437557}
   - component: {fileID: 1804577369154603350}
+  - component: {fileID: 5366189185129893404}
   m_Layer: 0
   m_Name: PlayerElf
   m_TagString: Player
@@ -168,6 +169,33 @@ MonoBehaviour:
   moveSpeed: 4
   rb: {fileID: 662959747117437556}
   animator: {fileID: 662959747117437557}
+  isMining: 0
+--- !u!61 &5366189185129893404
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 662959747117437559}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.00000047683716, y: -0.10431528}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 2, y: 2}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.4224329, y: 0.7061243}
+  m_EdgeRadius: 0
 --- !u!1 &662959748423558027
 GameObject:
   m_ObjectHideFlags: 0

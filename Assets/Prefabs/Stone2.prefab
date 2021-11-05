@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7146631793776986096}
   - component: {fileID: 7146631793776986099}
   - component: {fileID: 7146631793776986098}
+  - component: {fileID: 3848348995019668119}
   m_Layer: 8
   m_Name: Stone2
   m_TagString: Walls
@@ -109,3 +110,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!58 &3848348995019668119
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7146631793776986109}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.55
