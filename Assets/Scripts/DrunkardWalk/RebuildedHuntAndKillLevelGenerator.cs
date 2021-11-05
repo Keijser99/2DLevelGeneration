@@ -49,9 +49,21 @@ public class RebuildedHuntAndKillLevelGenerator : MonoBehaviour
 
 	public bool canDebug;
 
+	private static RebuildedHuntAndKillLevelGenerator _instance;
+
+	public static RebuildedHuntAndKillLevelGenerator Instance { get { return _instance; } }
+
 	void Awake() 
 	{
-        Setup();
+		if (_instance != null && _instance != this)
+		{
+			Destroy(this.gameObject);
+		}
+		else
+		{
+			_instance = this;
+		}
+		Setup();
         CreateFloors();    
         CreateWalls();
         CreateBottomWalls();
@@ -383,10 +395,11 @@ public class RebuildedHuntAndKillLevelGenerator : MonoBehaviour
 		Instantiate(toSpawn, new Vector3(x, y, 0), Quaternion.identity);
 	}
 
-	public void MiningWalls(Vector2 minedWallpos)
+	public void MiningWalls(GameObject minedWall)
     {
-		grid[(int)minedWallpos.x, (int)minedWallpos.y] = LevelTile.floor;
-		Spawn(minedWallpos.x, minedWallpos.y, floorTiles[Random.Range(0, floorTiles.Length)]);
+		minedWall.SetActive(false);
+		grid[(int)minedWall.transform.position.x, (int)minedWall.transform.position.y] = LevelTile.floor;
+		Spawn((int)minedWall.transform.position.x, (int)minedWall.transform.position.y, floorTiles[Random.Range(0, floorTiles.Length)]);
 		CreateWalls();
 	}
 

@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
 
     public Animator animator;
 
-    Vector2 movement, otherPos;
+    Vector2 movement;
 
     RebuildedHuntAndKillLevelGenerator HuntKillAlg;
 
@@ -19,7 +19,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
-        HuntKillAlg = gameObject.GetComponent<RebuildedHuntAndKillLevelGenerator>();
+        HuntKillAlg = RebuildedHuntAndKillLevelGenerator.Instance;
     }
 
     private void Update()
@@ -46,15 +46,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D other)
     {
-        otherPos = new Vector2(other.gameObject.transform.position.x, other.gameObject.transform.position.y);
-
-        //Debug.Log($"I've hit a {other}");
         if (other.gameObject.CompareTag("Walls") && isMining)
         {
-            Debug.Log($"I'm mining this {other.gameObject}");
-            other.gameObject.SetActive(false);
-            Debug.Log(otherPos);
-            HuntKillAlg.MiningWalls(otherPos);
+            HuntKillAlg.MiningWalls(other.gameObject);
         }
     }
 }
