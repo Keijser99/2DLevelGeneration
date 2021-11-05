@@ -7,17 +7,29 @@ public class NewSceneReloader : MonoBehaviour
 {
     Scene activeScene;
 
+    PlayerMovement player;
+
     private void Awake()
     {
         activeScene = SceneManager.GetActiveScene();
     }
+
+    //private void Start()
+    //{
+    //    player.GetComponent<PlayerMovement>();
+
+    //    if (activeScene.name == "HuntAndKillLevelGeneration")
+    //    {
+    //        player.canMine = true;
+    //    }
+    //}
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
             SwapScenes();
-        }       
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)

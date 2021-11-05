@@ -169,6 +169,8 @@ MonoBehaviour:
   moveSpeed: 4
   rb: {fileID: 662959747117437556}
   animator: {fileID: 662959747117437557}
+  huntKillGenerator: {fileID: 5490260888324493732, guid: 64a8e38c49598a5439ef563745eeb392,
+    type: 3}
   isMining: 0
 --- !u!61 &5366189185129893404
 BoxCollider2D:

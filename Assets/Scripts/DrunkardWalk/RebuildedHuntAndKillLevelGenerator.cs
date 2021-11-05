@@ -19,7 +19,6 @@ public class RebuildedHuntAndKillLevelGenerator : MonoBehaviour
 		public Vector2 dir;
 		public Vector2 pos;
 	}
-    //List<RandomWalker> walkers;
 
     public GameObject[] floorTiles; //Floors are generated first by the Drunkards Walk Algorithm
     public GameObject[] wallTiles; //Generates around placed floor tiles
@@ -45,13 +44,26 @@ public class RebuildedHuntAndKillLevelGenerator : MonoBehaviour
 	bool northEmpty = false, eastEmpty = false, southEmpty = false, westEmpty = false;
 
 	RandomWalker theWalker;
-	Vector2 walkerPos;
+	Vector2 walkerPos, minedWallPos;
 
 	public bool canDebug;
 
+	private static RebuildedHuntAndKillLevelGenerator _instance;
+
+	public static RebuildedHuntAndKillLevelGenerator Instance { get { return _instance; } }
+
 	void Awake() 
 	{
-        Setup();
+		if (_instance != null && _instance != this)
+		{
+			Destroy(this.gameObject);
+		}
+		else
+		{
+			_instance = this;
+		}
+
+		Setup();
         CreateFloors();    
         CreateWalls();
         CreateBottomWalls();
@@ -76,7 +88,6 @@ public class RebuildedHuntAndKillLevelGenerator : MonoBehaviour
 		}
 
         //generate first walker
-		//walkers = new List<RandomWalker>();
 		theWalker = new RandomWalker();
 		theWalker.dir = RandomDirection();
 
@@ -209,9 +220,6 @@ public class RebuildedHuntAndKillLevelGenerator : MonoBehaviour
 		int x = Mathf.FloorToInt(currentWalkerPosition.x);
 		int y = Mathf.FloorToInt(currentWalkerPosition.y);
 
-		//if(canDebug) Debug.Log("Walker Position = (" + x + ", " + y + ")");
-		//if(canDebug) Debug.Log("Current Walker Position is: " + currentWalkerPosition);
-
 		northEmpty = false;
 		eastEmpty = false;
 		southEmpty = false;
@@ -303,7 +311,6 @@ public class RebuildedHuntAndKillLevelGenerator : MonoBehaviour
 		{
 			for (int y = 0; y < levelHeight - 1; y++)
 			{
-				if (canDebug) Debug.Log($"Checking position: {x}, {y}");
 				if (grid[x, y] == LevelTile.empty)
 				{
 					newPos = new Vector2(x, y);
@@ -312,7 +319,6 @@ public class RebuildedHuntAndKillLevelGenerator : MonoBehaviour
 				}
 			}
 		}
-		if (canDebug) Debug.Log($"newPos outside for-loop: {newPos}");
 		return newPos;
 	}
 
@@ -350,25 +356,29 @@ public class RebuildedHuntAndKillLevelGenerator : MonoBehaviour
 		Spawn(startTile.x, startTile.y, start);
 	}
 
-	void SpawnPlayer() {
+	void SpawnPlayer() 
+	{
 		Vector3 playerPos = playerSpawnpoint;
 		GameObject playerObj = Instantiate(player, playerPos, Quaternion.identity) as GameObject;
     }
 
-    public void SpawnExit() {
-
-		//Vector2 playerPos = new Vector2(Mathf.RoundToInt(levelWidth/ 2.0f), Mathf.RoundToInt(levelHeight/ 2.0f));
+    public void SpawnExit() 
+	{
 		Vector2 playerPos = walkerPos;
         Vector2 exitPos = playerPos;
         float exitDistance = 0f;
 
-		//This will place the exit gate the furthest possible from the starting point as possible
-		for (int x = 0; x < levelWidth - 1; x++){
-			for (int y = 0; y < levelHeight - 1; y++){
-				if (grid[x,y] == LevelTile.floor){
+		//This will place the exit gate on a floor tile the furthest possible from the starting point as possible
+		for (int x = 0; x < levelWidth - 1; x++)
+		{
+			for (int y = 0; y < levelHeight - 1; y++)
+			{
+				if (grid[x,y] == LevelTile.floor)
+				{
                     Vector2 nextPos = new Vector2(x, y);
                     float distance = Vector2.Distance(playerPos, nextPos);
-                    if (distance > exitDistance) {
+                    if (distance > exitDistance) 
+					{
                         exitDistance = distance;
                         exitPos = nextPos;
                     }
@@ -379,20 +389,76 @@ public class RebuildedHuntAndKillLevelGenerator : MonoBehaviour
         Spawn(exitPos.x, exitPos.y, exit);
     }       
 
-	void Spawn(float x, float y, GameObject toSpawn) {
+	void Spawn(float x, float y, GameObject toSpawn) 
+	{
 		Instantiate(toSpawn, new Vector3(x, y, 0), Quaternion.identity);
 	}
 
-	public void MiningWalls(Vector2 minedWallpos)
+	//Gets the location of the tile that is mined and places a floor there
+	public void MiningWalls(GameObject minedWall)
     {
-		grid[(int)minedWallpos.x, (int)minedWallpos.y] = LevelTile.floor;
-		Spawn(minedWallpos.x, minedWallpos.y, floorTiles[Random.Range(0, floorTiles.Length)]);
-		CreateWalls();
+		minedWallPos = minedWall.transform.position;
+
+		minedWallPos.x = Mathf.Clamp(minedWallPos.x, 1, levelWidth - 2);
+		minedWallPos.y = Mathf.Clamp(minedWallPos.y, 1, levelHeight - 2);
+
+		grid[(int)minedWallPos.x, (int)minedWallPos.y] = LevelTile.floor;
+
+		Spawn(minedWallPos.x, minedWallPos.y, floorTiles[Random.Range(0, floorTiles.Length)]);
+
+		CheckForNewWallPositions();
 	}
 
-	private void OnDrawGizmos()
-	{
-		Gizmos.color = Color.green;
-		Gizmos.DrawSphere(playerSpawnpoint, .5f);
+	private void CheckForNewWallPositions()
+    {
+		//Check around the the position of last mined wall to see whether there is an empty space next to the new floor
+		if (grid[(int)minedWallPos.x, (int)minedWallPos.y + 1] == LevelTile.empty)
+		{
+			grid[(int)minedWallPos.x, (int)minedWallPos.y + 1] = LevelTile.wall;
+			Spawn(minedWallPos.x, minedWallPos.y + 1, wallTiles[Random.Range(0, wallTiles.Length)]);
+		}
+
+		if (grid[(int)minedWallPos.x, (int)minedWallPos.y - 1] == LevelTile.empty)
+		{
+			grid[(int)minedWallPos.x, (int)minedWallPos.y - 1] = LevelTile.wall;
+			Spawn(minedWallPos.x, minedWallPos.y - 1, wallTiles[Random.Range(0, wallTiles.Length)]);
+		}
+
+		if (grid[(int)minedWallPos.x + 1, (int)minedWallPos.y] == LevelTile.empty)
+		{
+			grid[(int)minedWallPos.x + 1, (int)minedWallPos.y] = LevelTile.wall;
+			Spawn(minedWallPos.x + 1, minedWallPos.y, wallTiles[Random.Range(0, wallTiles.Length)]);
+		}
+
+		if (grid[(int)minedWallPos.x - 1, (int)minedWallPos.y] == LevelTile.empty)
+		{
+			grid[(int)minedWallPos.x - 1, (int)minedWallPos.y] = LevelTile.wall;
+			Spawn(minedWallPos.x - 1, minedWallPos.y, wallTiles[Random.Range(0, wallTiles.Length)]);
+		}
+
+
+		if (grid[(int)minedWallPos.x - 1, (int)minedWallPos.y - 1] == LevelTile.empty)
+		{
+			grid[(int)minedWallPos.x - 1, (int)minedWallPos.y - 1] = LevelTile.wall;
+			Spawn(minedWallPos.x - 1, minedWallPos.y - 1, wallTiles[Random.Range(0, wallTiles.Length)]);
+		}
+
+		if (grid[(int)minedWallPos.x - 1, (int)minedWallPos.y + 1] == LevelTile.empty)
+		{
+			grid[(int)minedWallPos.x - 1, (int)minedWallPos.y + 1] = LevelTile.wall;
+			Spawn(minedWallPos.x - 1, minedWallPos.y + 1, wallTiles[Random.Range(0, wallTiles.Length)]);
+		}
+
+		if (grid[(int)minedWallPos.x + 1, (int)minedWallPos.y + 1] == LevelTile.empty)
+		{
+			grid[(int)minedWallPos.x + 1, (int)minedWallPos.y + 1] = LevelTile.wall;
+			Spawn(minedWallPos.x + 1, minedWallPos.y + 1, wallTiles[Random.Range(0, wallTiles.Length)]);
+		}
+
+		if (grid[(int)minedWallPos.x + 1, (int)minedWallPos.y - 1] == LevelTile.empty)
+		{
+			grid[(int)minedWallPos.x + 1, (int)minedWallPos.y - 1] = LevelTile.wall;
+			Spawn(minedWallPos.x + 1, minedWallPos.y - 1, wallTiles[Random.Range(0, wallTiles.Length)]);
+		}
 	}
 }
