@@ -49,11 +49,11 @@ public class RebuildedHuntAndKillLevelGenerator : MonoBehaviour
 	public bool canDebug;
 
 	private static RebuildedHuntAndKillLevelGenerator _instance;
-
 	public static RebuildedHuntAndKillLevelGenerator Instance { get { return _instance; } }
 
-	void Awake() 
+	void Awake()
 	{
+		//Makes this script a singleton, so that it is easier accessible and makes sure that there is only one of it at the time
 		if (_instance != null && _instance != this)
 		{
 			Destroy(this.gameObject);
@@ -123,6 +123,7 @@ public class RebuildedHuntAndKillLevelGenerator : MonoBehaviour
 		} while(iterations < iterationSteps);
 	}
 
+	//Replaces the empty tiles around the floor tiles with wall tiles
 	void CreateWalls()
 	{
 		for (int x = 0; x < levelWidth-1; x++) 
@@ -170,6 +171,7 @@ public class RebuildedHuntAndKillLevelGenerator : MonoBehaviour
 		}
 	}
 
+	//Replaces walls that have a floor under it with a wall that has a 3D effect
 	void CreateBottomWalls()
 	{
 		for (int x = 0; x < levelWidth; x++) 
@@ -212,6 +214,7 @@ public class RebuildedHuntAndKillLevelGenerator : MonoBehaviour
 		}
 	}
 
+	//Decides which new direction the walker needs to make. It can't go on a point in the grid it already has been to
 	private Vector2 NewDirection()
     {
 		int choice = Random.Range(0, 4); //Chooses a random direction (north = 0, east = 1, south = 2, west = 3)
@@ -250,6 +253,7 @@ public class RebuildedHuntAndKillLevelGenerator : MonoBehaviour
 			}
 		}
 
+		//Checks if the chosen direction already is a floor
         if (northEmpty == true && choice == 0)
         {
 			if(canDebug) Debug.Log("Going UP");
@@ -350,19 +354,21 @@ public class RebuildedHuntAndKillLevelGenerator : MonoBehaviour
 		return count;
 	}
 
+	//Places start tile on the first point of the walker
 	void SpawnStartTile()
 	{
 		Vector2 startTile = playerSpawnpoint;
 		Spawn(startTile.x, startTile.y, start);
 	}
 
-	void SpawnPlayer() 
+	//Places the player on the first point of the walker
+	void SpawnPlayer()
 	{
 		Vector3 playerPos = playerSpawnpoint;
 		GameObject playerObj = Instantiate(player, playerPos, Quaternion.identity) as GameObject;
     }
 
-    public void SpawnExit() 
+    public void SpawnExit()
 	{
 		Vector2 playerPos = walkerPos;
         Vector2 exitPos = playerPos;
@@ -459,6 +465,20 @@ public class RebuildedHuntAndKillLevelGenerator : MonoBehaviour
 		{
 			grid[(int)minedWallPos.x + 1, (int)minedWallPos.y - 1] = LevelTile.wall;
 			Spawn(minedWallPos.x + 1, minedWallPos.y - 1, wallTiles[Random.Range(0, wallTiles.Length)]);
+		}
+
+
+		//Also spawn bottom walls on wall locations where there is a floor tile under it
+		for (int x = 0; x < levelWidth; x++)
+		{
+			for (int y = 1; y < levelHeight; y++)
+			{
+				if (grid[x, y] == LevelTile.wall && grid[x, y - 1] == LevelTile.floor)
+				{
+					grid[x, y] = LevelTile.bottomWall;
+					Spawn(x, y, bottomWallTiles[Random.Range(0, bottomWallTiles.Length)]);
+				}
+			}
 		}
 	}
 }

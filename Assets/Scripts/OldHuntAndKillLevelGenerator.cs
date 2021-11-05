@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 
-public class HuntAndKillLevelGenerator : MonoBehaviour
+public class OldHuntAndKillLevelGenerator : MonoBehaviour
 {
 	/*
     1. Choose a starting location.

@@ -14,16 +14,6 @@ public class NewSceneReloader : MonoBehaviour
         activeScene = SceneManager.GetActiveScene();
     }
 
-    //private void Start()
-    //{
-    //    player.GetComponent<PlayerMovement>();
-
-    //    if (activeScene.name == "HuntAndKillLevelGeneration")
-    //    {
-    //        player.canMine = true;
-    //    }
-    //}
-
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.R))

@@ -11,17 +11,12 @@ public class PlayerMovement : MonoBehaviour
 
     public Animator animator;
 
-    Vector2 movement, otherPos;
+    Vector2 movement;
 
     RebuildedHuntAndKillLevelGenerator huntKillAlg;
 
     [SerializeField]
-    GameObject huntKillGenerator;
-
-    [SerializeField]
-    private bool isMining = false;
-
-    private bool canMine = false;
+    private bool isMining = false, canMine = false;
 
     Scene activeScene;
 
@@ -63,14 +58,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D other)
     {
-        //otherPos = new Vector2(other.gameObject.transform.position.x, other.gameObject.transform.position.y);
 
-        //Debug.Log($"I've hit a {other}");
         if (other.gameObject.CompareTag("Walls") && isMining && canMine)
         {
-            //Debug.Log($"I'm mining this {other.gameObject}");
             other.gameObject.SetActive(false);
-            //Debug.Log(otherPos);
+
             huntKillAlg.MiningWalls(other.gameObject);
         }
     }
