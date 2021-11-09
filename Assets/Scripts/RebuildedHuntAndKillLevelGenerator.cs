@@ -346,8 +346,10 @@ public class RebuildedHuntAndKillLevelGenerator : MonoBehaviour
 	int NumberOfFloors()
 	{
 		int count = 0;
-		foreach (LevelTile space in grid){
-			if (space == LevelTile.floor){
+		foreach (LevelTile space in grid)
+		{
+			if (space == LevelTile.floor)
+			{
 				count++;
 			}
 		}

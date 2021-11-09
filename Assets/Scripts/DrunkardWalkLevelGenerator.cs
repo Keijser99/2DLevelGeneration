@@ -7,7 +7,8 @@ public class DrunkardWalkLevelGenerator : MonoBehaviour
 {
     enum LevelTile {empty, floor, wall, bottomWall, start};
     LevelTile[,] grid; //Comma means it is a two dimensional array, so the variable 'grid' has two variables stored in the array
-    struct RandomWalker {
+    struct RandomWalker 
+	{
 		public Vector2 dir;
 		public Vector2 pos;
 	}
@@ -58,13 +59,16 @@ public class DrunkardWalkLevelGenerator : MonoBehaviour
         SpawnExit();
     }
 
-    void Setup() {
+    void Setup() 
+	{
         // prepare grid
 		grid = new LevelTile[levelWidth, levelHeight];
 
 		//fill 'grid' with empty Level tiles
-		for (int x = 0; x < levelWidth - 1; x++){
-			for (int y = 0; y < levelHeight - 1; y++){ 
+		for (int x = 0; x < levelWidth - 1; x++)
+		{
+			for (int y = 0; y < levelHeight - 1; y++)
+			{ 
 				grid[x, y] = LevelTile.empty;
 			}
 		}
@@ -83,17 +87,21 @@ public class DrunkardWalkLevelGenerator : MonoBehaviour
 		walkers.Add(walker);
 	}
 
-	void CreateFloors() {
+	void CreateFloors() 
+	{
 		int iterations = 0;
 		do{
 			//assign floor enum member at position of every Walker
-			foreach (RandomWalker walker in walkers){
+			foreach (RandomWalker walker in walkers)
+			{
 				grid[(int)walker.pos.x,(int)walker.pos.y] = LevelTile.floor;
 			}
 
 			//chance: Walker pick new direction
-			for (int i = 0; i < walkers.Count; i++) {
-				if (Random.value < chanceWalkerChangeDir){
+			for (int i = 0; i < walkers.Count; i++) 
+			{
+				if (Random.value < chanceWalkerChangeDir)
+				{
 					RandomWalker thisWalker = walkers[i];
 					thisWalker.dir = RandomDirection();
 					walkers[i] = thisWalker;
@@ -101,14 +109,16 @@ public class DrunkardWalkLevelGenerator : MonoBehaviour
 			}
 
 			//move Walkers
-			for (int i = 0; i < walkers.Count; i++){
+			for (int i = 0; i < walkers.Count; i++)
+			{
 				RandomWalker walker = walkers[i];
 				walker.pos += walker.dir;
 				walkers[i] = walker;				
 			}
 
 			//avoid boarder of grid
-			for (int i =0; i < walkers.Count; i++){
+			for (int i =0; i < walkers.Count; i++)
+			{
 				RandomWalker walker = walkers[i];
 				walker.pos.x = Mathf.Clamp(walker.pos.x, 1, levelWidth-2);
 				walker.pos.y = Mathf.Clamp(walker.pos.y, 1, levelHeight-2);
@@ -116,7 +126,8 @@ public class DrunkardWalkLevelGenerator : MonoBehaviour
 			}
 
 			//check to exit loop
-			if ((float)NumberOfFloors() / (float)grid.Length > percentToFill){
+			if ((float)NumberOfFloors() / (float)grid.Length > percentToFill)
+			{
 				break;
 			}
 			iterations++;
@@ -125,33 +136,44 @@ public class DrunkardWalkLevelGenerator : MonoBehaviour
 
 	//Replaces the empty tiles around the floor tiles with wall tiles
 	void CreateWalls(){
-		for (int x = 0; x < levelWidth-1; x++) {
-			for (int y = 0; y < levelHeight-1; y++) {
-				if (grid[x,y] == LevelTile.floor) {
-					if (grid[x,y+1] == LevelTile.empty) {
+		for (int x = 0; x < levelWidth-1; x++) 
+		{
+			for (int y = 0; y < levelHeight-1; y++) 
+			{
+				if (grid[x,y] == LevelTile.floor) 
+				{
+					if (grid[x,y+1] == LevelTile.empty) 
+					{
 						grid[x,y+1] = LevelTile.wall;
 					}
 
-					if (grid[x,y-1] == LevelTile.empty) {
+					if (grid[x,y-1] == LevelTile.empty) 
+					{
 						grid[x,y-1] = LevelTile.wall;
 					}
-					if (grid[x+1,y] == LevelTile.empty) {
+					if (grid[x+1,y] == LevelTile.empty) 
+					{
 						grid[x+1,y] = LevelTile.wall;
 					}
-					if (grid[x-1,y] == LevelTile.empty) {
+					if (grid[x-1,y] == LevelTile.empty) 
+					{
 						grid[x-1,y] = LevelTile.wall;
 					}
 
-                    if (grid[x - 1, y - 1] == LevelTile.empty) {
+                    if (grid[x - 1, y - 1] == LevelTile.empty) 
+					{
                         grid[x - 1, y - 1] = LevelTile.wall;
                     }
-                    if (grid[x - 1, y + 1] == LevelTile.empty) {
+                    if (grid[x - 1, y + 1] == LevelTile.empty) 
+					{
                         grid[x - 1, y + 1] = LevelTile.wall;
                     }
-                    if (grid[x + 1, y + 1] == LevelTile.empty) {
+                    if (grid[x + 1, y + 1] == LevelTile.empty) 
+					{
                         grid[x + 1, y + 1] = LevelTile.wall;
                     }
-                    if (grid[x + 1, y - 1] == LevelTile.empty) {
+                    if (grid[x + 1, y - 1] == LevelTile.empty) 
+					{
                         grid[x + 1, y - 1] = LevelTile.wall;
                     }
                 }
@@ -160,10 +182,14 @@ public class DrunkardWalkLevelGenerator : MonoBehaviour
 	}
 
 	//Replaces walls that have a floor under it with a wall that has a 3D effect
-	void CreateBottomWalls() {
-		for (int x = 0; x < levelWidth; x++) {
-			for (int y = 1; y < levelHeight; y++) {
-				if (grid[x, y] == LevelTile.wall && grid[x, y - 1] == LevelTile.floor) {
+	void CreateBottomWalls() 
+	{
+		for (int x = 0; x < levelWidth; x++) 
+		{
+			for (int y = 1; y < levelHeight; y++) 
+			{
+				if (grid[x, y] == LevelTile.wall && grid[x, y - 1] == LevelTile.floor) 
+				{
                     grid[x, y] = LevelTile.bottomWall;
                 }
             }
@@ -214,7 +240,8 @@ public class DrunkardWalkLevelGenerator : MonoBehaviour
 		}
 	}
 
-	int NumberOfFloors() {
+	int NumberOfFloors() 
+	{
 		int count = 0;
 		foreach (LevelTile space in grid){
 			if (space == LevelTile.floor){
@@ -232,35 +259,41 @@ public class DrunkardWalkLevelGenerator : MonoBehaviour
 	}
 
 	//Places the player in the middle of the grid
-	void SpawnPlayer() {
+	void SpawnPlayer() 
+	{
 		Vector3 playerPos = new Vector3(Mathf.RoundToInt(levelWidth / 2.0f), Mathf.RoundToInt(levelHeight / 2.0f), 0);
 		GameObject playerObj = Instantiate(player, playerPos, Quaternion.identity) as GameObject;
     }
 
-    public void SpawnExit() {
+    public void SpawnExit() 
+	{
 
         Vector2 playerPos = new Vector2(Mathf.RoundToInt(levelWidth/ 2.0f), Mathf.RoundToInt(levelHeight/ 2.0f));
         Vector2 exitPos = playerPos;
         float exitDistance = 0f;
 
 		//This will place the exit gate on a floor tile the furthest possible from the starting point as possible
-		for (int x = 0; x < levelWidth - 1; x++){
-			for (int y = 0; y < levelHeight - 1; y++){
-				if (grid[x,y] == LevelTile.floor){
+		for (int x = 0; x < levelWidth - 1; x++)
+		{
+			for (int y = 0; y < levelHeight - 1; y++)
+			{
+				if (grid[x,y] == LevelTile.floor)
+				{
                     Vector2 nextPos = new Vector2(x, y);
                     float distance = Vector2.Distance(playerPos, nextPos);
-                    if (distance > exitDistance) {
+                    if (distance > exitDistance) 
+					{
                         exitDistance = distance;
                         exitPos = nextPos;
                     }
                 }
             }
         }
-
         Spawn(exitPos.x, exitPos.y, exit);
     }       
 
-	void Spawn(float x, float y, GameObject toSpawn) {
+	void Spawn(float x, float y, GameObject toSpawn) 
+	{
 		Instantiate(toSpawn, new Vector3(x, y, 0), Quaternion.identity);
 	}
 
