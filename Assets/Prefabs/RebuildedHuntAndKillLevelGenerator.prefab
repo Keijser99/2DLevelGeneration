@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5490260888324493734}
-  - component: {fileID: 5490260888324493733}
+  - component: {fileID: 5490260887503394362}
   m_Layer: 0
   m_Name: RebuildedHuntAndKillLevelGenerator
   m_TagString: Untagged
@@ -31,7 +31,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5490260888324493733
+--- !u!114 &5490260887503394362
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -40,23 +40,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 5490260888324493732}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f450454bee170d418fe86b53775c57b, type: 3}
+  m_Script: {fileID: 11500000, guid: 96ef7b79e4cd5c94387d9ba71f4b7620, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  floorTiles:
-  - {fileID: 2928700710886831936, guid: 98fe7acb479f1fa498e4cde6c90d25c6, type: 3}
-  - {fileID: 3229865064207809358, guid: bd23681b249aad347bf2887dd4046616, type: 3}
-  wallTiles:
-  - {fileID: 7146631793776986109, guid: 4a19013ef2f682043a239921f2582b6b, type: 3}
-  - {fileID: 7146631793776986109, guid: 129ceac3d23ae4d84bdec83c3d00a797, type: 3}
-  bottomWallTiles:
-  - {fileID: 3253358812288048509, guid: c9896181e03ce9d459f8d19f1d8d6a14, type: 3}
-  - {fileID: 3253358812288048509, guid: 896e982aff933aa4baeaf198770c3f1f, type: 3}
-  exit: {fileID: 3974025287381290336, guid: ed9156316bfb49c4bbc630ccaaaff9c7, type: 3}
-  player: {fileID: 662959747117437559, guid: 75588177aa24da4409c46f5a5294da0b, type: 3}
-  start: {fileID: 2928700710886831936, guid: 9bb9b785dafd91d42a74cb0449f25d32, type: 3}
-  levelWidth: 30
-  levelHeight: 30
-  percentToFill: 0.8
-  iterationSteps: 200000
-  canDebug: 0
+  tilemapVisualizer: {fileID: 0}
+  startPosition: {x: 0, y: 0}
+  randomWalkParameters: {fileID: 11400000, guid: 9853dded8cd83af488e7322a804d3d77,
+    type: 2}
+  minRoomWidth: 10
+  minRoomHeight: 10
+  dungeonWidth: 70
+  dungeonHeight: 70
+  offset: 2
+  lastRoomCenterNumber: 0
+  exitTilePrefab: {fileID: 3974025287381290336, guid: 8bcaeb3b72f7647f6820fded1214a5e9,
+    type: 3}
+  player: {fileID: 0}

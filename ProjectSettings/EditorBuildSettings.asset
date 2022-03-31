@@ -8,7 +8,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/DrunkardWalkLevelGeneration.unity
     guid: dd809d466f33097478d71f704a8fc0e9
-  - enabled: 1
-    path: Assets/Scenes/HuntAndKillLevelGeneration.unity
+  - enabled: 0
+    path: Assets/Scenes/Old/HuntAndKillLevelGeneration.unity
     guid: e16aa9d3602b1e04f8cab14bca5423ac
+  - enabled: 1
+    path: Assets/Scenes/BSPLevelGeneration.unity
+    guid: af88452ece8ddf146a2d85872557668e
   m_configObjects: {}
