@@ -133,6 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 91271189}
   - component: {fileID: 91271188}
+  - component: {fileID: 91271190}
   m_Layer: 0
   m_Name: Loot
   m_TagString: Untagged
@@ -147,7 +148,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 91271187}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ac04959dd93037a4c9b8865e58711f94, type: 3}
   m_Name: 
@@ -173,6 +174,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &91271190
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 91271187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71f13ecb8c20fe14f896a59c3184a89f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  percentages: 0a000000140000001e00000028000000
+  scoreText: {fileID: 1051821340}
+  score: 0
+  total: 0
+  randomValue: 0
 --- !u!1 &450129970
 GameObject:
   m_ObjectHideFlags: 0
