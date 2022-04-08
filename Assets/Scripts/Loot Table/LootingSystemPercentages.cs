@@ -18,7 +18,7 @@ public class LootingSystemPercentages : MonoBehaviour
     public Text scoreText;
 
     [Header("Automatically adjusted")]
-    public int score;
+    public int score, currentScore;
     public int total;
     public int randomValue;
 
@@ -50,6 +50,7 @@ public class LootingSystemPercentages : MonoBehaviour
     private void GetLootValue()
     {
         topValue = 0;
+        score = 0;
         randomValue = Random.Range(0, total);
         Debug.Log($"Random Value = {randomValue}");
 
@@ -60,8 +61,9 @@ public class LootingSystemPercentages : MonoBehaviour
             if (randomValue < topValue)
             {
                 score += 1 + i;
-                scoreText.text = $"Score:   {score}";
-                Debug.Log($"Points gained = {i}");
+                currentScore += score;
+                scoreText.text = $"Score:   {currentScore}";
+                Debug.Log($"i is {i}, so points gained = {score}");
                 break;
             }
         }

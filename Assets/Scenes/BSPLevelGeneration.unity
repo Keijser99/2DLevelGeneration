@@ -148,7 +148,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 91271187}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ac04959dd93037a4c9b8865e58711f94, type: 3}
   m_Name: 
@@ -181,7 +181,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 91271187}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 71f13ecb8c20fe14f896a59c3184a89f, type: 3}
   m_Name: 
@@ -189,6 +189,7 @@ MonoBehaviour:
   percentages: 0a000000140000001e00000028000000
   scoreText: {fileID: 1051821340}
   score: 0
+  currentScore: 0
   total: 0
   randomValue: 0
 --- !u!1 &450129970
@@ -321,6 +322,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 159551767, guid: 75588177aa24da4409c46f5a5294da0b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -50
+      objectReference: {fileID: 0}
     - target: {fileID: 662959747117437553, guid: 75588177aa24da4409c46f5a5294da0b,
         type: 3}
       propertyPath: m_RootOrder
@@ -380,6 +385,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PlayerElf
+      objectReference: {fileID: 0}
+    - target: {fileID: 662959748423558007, guid: 75588177aa24da4409c46f5a5294da0b,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 75588177aa24da4409c46f5a5294da0b, type: 3}

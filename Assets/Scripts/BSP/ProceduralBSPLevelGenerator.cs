@@ -14,7 +14,7 @@ public static class ProceduralBSPLevelGenerator
 
         /* 
          * This while-statement determines whether the invisible rooms will be split horizontally
-         * or vertically, so that the normal rooms can be generated
+         * or vertically, so that the actual rooms can be generated
         */
         while (roomsQueue.Count > 0)
         {
