@@ -153,104 +153,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &893709029
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 893709031}
-  - component: {fileID: 893709030}
-  m_Layer: 0
-  m_Name: DrunkardWalkLevelGenerator
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &893709030
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 893709029}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c19832bca2c0deb42b2f12ca6faa2898, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  floorTiles:
-  - {fileID: 2928700710886831936, guid: d3874031227d1ff428743536c234ce59, type: 3}
-  - {fileID: 3229865064207809358, guid: 52caa2858154dad4b8dbdf9632e31d74, type: 3}
-  wallTiles:
-  - {fileID: 7146631793776986109, guid: 5f030c8582ff4004db16fe0ff1d32879, type: 3}
-  - {fileID: 7146631793776986109, guid: b6c741bb7e523b84b92a1f5e6f86b689, type: 3}
-  bottomWallTiles:
-  - {fileID: 3253358812288048509, guid: 38fbd72a28667044ea7c962ff3f09fc1, type: 3}
-  - {fileID: 3253358812288048509, guid: 2a448ce2e5cc00d45a0c31b6fd15067e, type: 3}
-  exit: {fileID: 3974025287381290336, guid: ed9156316bfb49c4bbc630ccaaaff9c7, type: 3}
-  player: {fileID: 662959747117437559, guid: 75588177aa24da4409c46f5a5294da0b, type: 3}
-  start: {fileID: 2928700710886831936, guid: 9bb9b785dafd91d42a74cb0449f25d32, type: 3}
-  levelWidth: 30
-  levelHeight: 30
-  percentToFill: 0.2
-  chanceWalkerChangeDir: 0.5
-  maxWalkers: 1
-  iterationSteps: 100000
---- !u!4 &893709031
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 893709029}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11.016795, y: 4.240477, z: -268.2748}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &981729331
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 981729332}
-  m_Layer: 0
-  m_Name: _GENERATORS_
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &981729332
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 981729331}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 17.295395, y: 14.403693, z: -280.17346}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &2059006155
+--- !u!1001 &369259076
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2052850029018381706, guid: d59c4639acc50034a92b9ac5e9f4749d,
+        type: 3}
+      propertyPath: m_TagString
+      value: ScoreText
+      objectReference: {fileID: 0}
     - target: {fileID: 2789434460408067604, guid: d59c4639acc50034a92b9ac5e9f4749d,
         type: 3}
       propertyPath: m_Name
@@ -361,15 +275,101 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2789434460995683662, guid: d59c4639acc50034a92b9ac5e9f4749d,
-        type: 3}
-      propertyPath: m_CullTransparentMesh
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2789434460995683663, guid: d59c4639acc50034a92b9ac5e9f4749d,
-        type: 3}
-      propertyPath: m_text
-      value: PRESS 'R' TO SWAP ALGORITHMS
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d59c4639acc50034a92b9ac5e9f4749d, type: 3}
+--- !u!1 &893709029
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 893709031}
+  - component: {fileID: 893709030}
+  m_Layer: 0
+  m_Name: DrunkardWalkLevelGenerator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &893709030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 893709029}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c19832bca2c0deb42b2f12ca6faa2898, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  floorTiles:
+  - {fileID: 2928700710886831936, guid: d3874031227d1ff428743536c234ce59, type: 3}
+  - {fileID: 3229865064207809358, guid: 52caa2858154dad4b8dbdf9632e31d74, type: 3}
+  wallTiles:
+  - {fileID: 7146631793776986109, guid: 5f030c8582ff4004db16fe0ff1d32879, type: 3}
+  - {fileID: 7146631793776986109, guid: b6c741bb7e523b84b92a1f5e6f86b689, type: 3}
+  bottomWallTiles:
+  - {fileID: 3253358812288048509, guid: 38fbd72a28667044ea7c962ff3f09fc1, type: 3}
+  - {fileID: 3253358812288048509, guid: 2a448ce2e5cc00d45a0c31b6fd15067e, type: 3}
+  exit: {fileID: 3974025287381290336, guid: ed9156316bfb49c4bbc630ccaaaff9c7, type: 3}
+  player: {fileID: 662959747117437559, guid: 75588177aa24da4409c46f5a5294da0b, type: 3}
+  start: {fileID: 2928700710886831936, guid: 9bb9b785dafd91d42a74cb0449f25d32, type: 3}
+  levelWidth: 30
+  levelHeight: 30
+  percentToFill: 0.2
+  chanceWalkerChangeDir: 0.5
+  maxWalkers: 1
+  iterationSteps: 100000
+  chestPrefab: {fileID: 3974025287381290336, guid: 1ee148a12a598084f829fd8018576980,
+    type: 3}
+  chestSpawnFrequency: 35
+  amountOfWallsSurroundingChest: 2
+  maxChestToSpawn: 10
+--- !u!4 &893709031
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 893709029}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 11.016795, y: 4.240477, z: -268.2748}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &981729331
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 981729332}
+  m_Layer: 0
+  m_Name: _GENERATORS_
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &981729332
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 981729331}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 17.295395, y: 14.403693, z: -280.17346}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

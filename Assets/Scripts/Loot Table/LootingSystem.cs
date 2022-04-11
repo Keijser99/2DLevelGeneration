@@ -16,7 +16,8 @@ public class LootingSystem : MonoBehaviour
     };
     public int scoreSubtractor;
 
-    public Text scoreText;
+    public GameObject scoreGameObject;
+    //public Text scoreText;
 
     public GameObject chestPrefab;
     public Sprite chestOpenedSprite;
@@ -57,8 +58,11 @@ public class LootingSystem : MonoBehaviour
 
             Debug.Log("You opened a chest!");
             spriteRenderer = interactedChest.GetComponent<SpriteRenderer>();
+            interactedChest.GetComponent<BoxCollider2D>().enabled = false;
             spriteRenderer.sprite = chestOpenedSprite;
             interactedChest.tag = "Opened";
+
+
         }
 
         if (Input.GetButtonDown("Jump"))
@@ -74,6 +78,8 @@ public class LootingSystem : MonoBehaviour
 
     void LootChest()
     {
+        scoreGameObject = GameObject.FindGameObjectWithTag("ScoreText");
+
         randomValue = Random.Range(0, total);
         Debug.Log($"Random value is {randomValue}");
 
@@ -86,7 +92,7 @@ public class LootingSystem : MonoBehaviour
                 Debug.Log($"Random value is below {table[i]}!");
                 score += pointsGained;
                 Debug.Log($"{table[i]} was number {i + 1} in the table, so the player gets {pointsGained} points");
-                scoreText.text = $"Score:   {score}";
+                scoreGameObject.GetComponent<Text>().text = $"Score:   {score}";
                 return;
             }
             else

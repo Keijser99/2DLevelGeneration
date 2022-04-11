@@ -287,6 +287,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   table: 280000001e000000140000000a000000
   scoreSubtractor: 50
+  scoreGameObject: {fileID: 0}
   scoreText: {fileID: 0}
   chestPrefab: {fileID: 3974025287381290336, guid: 1ee148a12a598084f829fd8018576980,
     type: 3}

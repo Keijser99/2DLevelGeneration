@@ -8,6 +8,8 @@ TagManager:
   - Walls
   - Exit
   - Chest
+  - Opened
+  - ScoreText
   layers:
   - Default
   - TransparentFX
