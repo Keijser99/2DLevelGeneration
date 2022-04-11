@@ -140,7 +140,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &91271188
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -156,10 +156,15 @@ MonoBehaviour:
   table: 280000001e000000140000000a000000
   scoreSubtractor: 50
   scoreText: {fileID: 1051821340}
+  chestPrefab: {fileID: 0}
+  chestOpenedSprite: {fileID: 0}
   score: 0
   total: 0
   randomValue: 0
   tableLength: 0
+  pressingSpace: 0
+  canLoot: 0
+  interactedChest: {fileID: 0}
 --- !u!4 &91271189
 Transform:
   m_ObjectHideFlags: 0
@@ -322,10 +327,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 159551767, guid: 75588177aa24da4409c46f5a5294da0b, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -50
-      objectReference: {fileID: 0}
     - target: {fileID: 662959747117437553, guid: 75588177aa24da4409c46f5a5294da0b,
         type: 3}
       propertyPath: m_RootOrder
@@ -386,11 +387,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerElf
       objectReference: {fileID: 0}
-    - target: {fileID: 662959748423558007, guid: 75588177aa24da4409c46f5a5294da0b,
+    - target: {fileID: 4203623361610981415, guid: 75588177aa24da4409c46f5a5294da0b,
         type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -15
-      objectReference: {fileID: 0}
+      propertyPath: scoreText
+      value: 
+      objectReference: {fileID: 1051821340}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 75588177aa24da4409c46f5a5294da0b, type: 3}
 --- !u!1 &1167685988
@@ -21173,6 +21174,56 @@ TilemapCollider2D:
   m_Offset: {x: 0, y: 0}
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0.00001
+--- !u!1 &2041543460
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2041543462}
+  - component: {fileID: 2041543461}
+  m_Layer: 0
+  m_Name: LootSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &2041543461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2041543460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1098abe709b8f884f8b343eb06bf5874, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lootName: 
+  lootChange: 0
+  chances: 280000001e000000140000000a000000
+  chanceSum: 0
+  total: 0
+  scoreText: {fileID: 1051821340}
+  score: 0
+--- !u!4 &2041543462
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2041543460}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 39.628025, y: 32.780098, z: -10.592749}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2059006155
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21306,9 +21357,20 @@ PrefabInstance:
       objectReference: {fileID: 1923435383}
     - target: {fileID: 5490260887503394362, guid: 64a8e38c49598a5439ef563745eeb392,
         type: 3}
+      propertyPath: chestPrefab
+      value: 
+      objectReference: {fileID: 3974025287381290336, guid: 1ee148a12a598084f829fd8018576980,
+        type: 3}
+    - target: {fileID: 5490260887503394362, guid: 64a8e38c49598a5439ef563745eeb392,
+        type: 3}
       propertyPath: tilemapVisualizer
       value: 
       objectReference: {fileID: 1599067022}
+    - target: {fileID: 5490260887503394362, guid: 64a8e38c49598a5439ef563745eeb392,
+        type: 3}
+      propertyPath: maxChestSpawnRange
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 5490260888324493732, guid: 64a8e38c49598a5439ef563745eeb392,
         type: 3}
       propertyPath: m_Name

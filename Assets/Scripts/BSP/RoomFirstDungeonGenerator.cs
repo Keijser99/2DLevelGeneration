@@ -19,6 +19,11 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
     public GameObject exitTilePrefab;
     public GameObject player;
 
+    public GameObject chestPrefab;
+    [Range(1, 10)]
+    public int maxChestSpawnRange;
+    int chestCount;
+
     //Function from the abstact class AbstractDungeonGenerator
     protected override void RunProceduralGeneration()
     {
@@ -54,8 +59,10 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
 
         //Places player and the exit tile on first and last generated room respectively
         player.transform.position = new Vector3(roomCenters[0].x, roomCenters[0].y, 0f);
-        SpawnExit(exitTilePrefab, new Vector2Int(roomCenters[roomCenters.Count - 1].x, roomCenters[roomCenters.Count - 1].y));
-        //exitTilePrefab.transform.position = new Vector3(roomCenters[roomCenters.Count - 1].x, roomCenters[roomCenters.Count - 1].y, 0f);
+        SpawnPrefab(exitTilePrefab, new Vector2Int(roomCenters[roomCenters.Count - 1].x, roomCenters[roomCenters.Count - 1].y));
+
+
+        ChestScatterer(roomCenters);
 
         //This part connects the floor parts with the corridor parts to generate the corridors later
         HashSet<Vector2Int> corridors = ConnectRooms(roomCenters);
@@ -154,9 +161,34 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
         return floor;
     }
 
-    private void SpawnExit(GameObject exitTile, Vector2Int placeToSpawn)
+    private void SpawnPrefab(GameObject objectToSpawn, Vector2Int placeToSpawn)
     {
-        Instantiate(exitTile, new Vector3(placeToSpawn.x, placeToSpawn.y, 0f), Quaternion.identity);
-        Debug.Log($"Exit Spawnpoint at: {placeToSpawn}");
+        Instantiate(objectToSpawn, new Vector3(placeToSpawn.x, placeToSpawn.y, 0f), Quaternion.identity);
+    }
+
+    private void ChestScatterer(List<Vector2Int> roomCenters)
+    {
+        int randomValue;
+
+        foreach (var roomCenter in roomCenters)
+        {
+            randomValue = UnityEngine.Random.Range(0, maxChestSpawnRange);
+            if (randomValue < maxChestSpawnRange / 2)
+            {
+                //don't spawn
+            }
+            if (randomValue >= maxChestSpawnRange / 2)
+            {
+                int chestSpawnHandicapX = UnityEngine.Random.Range(-3, 3);
+                int chestSpawnHandicapY = UnityEngine.Random.Range(-3, 3);
+
+                if (chestSpawnHandicapX != 0 || chestSpawnHandicapY != 0)
+                {
+                    SpawnPrefab(chestPrefab, new Vector2Int(roomCenter.x + chestSpawnHandicapX, roomCenter.y + chestSpawnHandicapY));
+                    chestCount++;
+                }
+            }
+        }
+        Debug.Log($"Amount of chests spawned: {chestCount}");
     }
 }
